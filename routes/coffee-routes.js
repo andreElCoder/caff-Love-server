@@ -28,7 +28,7 @@ coffeeRoutes.get('/coffee-detail/:id' ,(req,res)=>{
     })
 })
 
-coffeeRoutes.get('/searchCoffee',(req,res)=>{
+coffeeRoutes.get('/search-coffee',(req,res)=>{
 
     Coffee.find({"name": { "$regex": req.body.search, "$options": "i" }},{"name":1})
       .then(response =>{
@@ -40,7 +40,8 @@ coffeeRoutes.post('/add-coffee' ,(req,res)=>{
     Coffee.create({
         name: req.body.name,
         description:req.body.description,
-        url:req.body.url
+        url:req.body.url,
+        rating:req.body.rating
     })
     .then(response =>{
         User.findOneAndUpdate(req.body.username,{
@@ -61,7 +62,8 @@ coffeeRoutes.post('/edit-coffee/:id' ,(req,res)=>{
     Coffee.findByIdAndUpdate(req.params.id,{
         name: req.body.name,
         description:req.body.description,
-        url:req.body.url
+        url:req.body.url,
+        rating:req.body.rating
     }).then(coffee =>{
         if(coffee)
         res.status(200).json(coffee)

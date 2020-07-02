@@ -4,6 +4,7 @@ const CoffeeSchema = new Schema({
   name: String,
   description: String,
   url:String,
+  rating: Number
 });
 const Coffee = mongoose.model('coffee', CoffeeSchema);
 

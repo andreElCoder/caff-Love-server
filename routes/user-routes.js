@@ -11,6 +11,4 @@ User.find({"username": { "$regex": req.body.search, "$options": "i" }},{"usernam
   })
 })
 
-
-
 module.exports = userRoutes
