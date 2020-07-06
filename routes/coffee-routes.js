@@ -3,6 +3,7 @@ const coffeeRoutes = express.Router();
 const Coffee = require('../models/coffee-model')
 const User = require ('../models/user-model');
 const mongoose = require('mongoose');
+const uploadCloud = require('../configs/cloudinary.js');
 
 coffeeRoutes.get('/coffees' ,(req,res)=>{
     Coffee.find()
@@ -86,5 +87,20 @@ coffeeRoutes.delete('/delete-coffee/:id', (req, res) => {
         res.status(500).json({ message: `Error occurred: ${error}`});
       });
   });
+
+
+  coffeeRoutes.post('/images/create', (req, res, next) => {
+  
+    Image.create(req.body)
+      .then(newImage => {
+        res.status(200).json(newImage);
+      })
+      .catch(err => next(err));
+  });
+  
+   
+  coffeeRoutes.post('/upload-coffee', uploadCloud.single("url"), (req, res, next) => {
+      res.json({ url: req.file.secure_url });
+  })
 
 module.exports = coffeeRoutes
