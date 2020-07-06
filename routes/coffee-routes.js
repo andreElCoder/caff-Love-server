@@ -2,7 +2,7 @@ const express    = require('express');
 const coffeeRoutes = express.Router();
 const Coffee = require('../models/coffee-model')
 const User = require ('../models/user-model');
-
+const mongoose = require('mongoose');
 
 coffeeRoutes.get('/coffees' ,(req,res)=>{
     Coffee.find()
@@ -58,7 +58,10 @@ coffeeRoutes.post('/add-coffee' ,(req,res)=>{
     })
 })
 
-coffeeRoutes.post('/edit-coffee/:id' ,(req,res)=>{
+coffeeRoutes.put('/edit-coffee/:id' ,(req,res)=>{
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        res.status(400).json({ message: 'Specified id is not valid'});
+      }
     Coffee.findByIdAndUpdate(req.params.id,{
         name: req.body.name,
         description:req.body.description,
@@ -67,11 +70,21 @@ coffeeRoutes.post('/edit-coffee/:id' ,(req,res)=>{
     }).then(coffee =>{
         if(coffee)
         res.status(200).json(coffee)
-        else{
-            res.status(404).json({message: "No coffee found with that id"})
-        }
     })
 })
-
+    
+coffeeRoutes.delete('/delete-coffee/:id', (req, res) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.status(400).json({ message: 'Specified id is not valid'});
+    }
+  
+    Coffee.findByIdAndDelete(req.params.id)
+      .then((response) => {
+        res.json({ message: response})
+      })
+      .catch(error => {
+        res.status(500).json({ message: `Error occurred: ${error}`});
+      });
+  });
 
 module.exports = coffeeRoutes
