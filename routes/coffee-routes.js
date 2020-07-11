@@ -96,7 +96,6 @@ coffeeRoutes.delete('/delete-coffee/:id', (req, res) => {
       })
       .catch(err => next(err));
   });
-  
   coffeeRoutes.post('/upload-coffee', uploadCloud.single("url"), (req, res, next) => {
       res.json({ url: req.file.secure_url });
   })
