@@ -17,6 +17,4 @@ userRoutes.get('/profile',(req,res)=>{
   res.status(200).json(response)
 })
 
-
-
 module.exports = userRoutes
