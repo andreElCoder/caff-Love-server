@@ -88,7 +88,7 @@ coffeeRoutes.delete('/delete-coffee/:id', (req, res) => {
       });
   });
 
-  coffeeRoutes.post('/images/create', (req, res, next) => {
+coffeeRoutes.post('/images/create', (req, res, next) => {
   
     Image.create(req.body)
       .then(newImage => {

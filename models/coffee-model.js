@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
-const locationSchema = new Schema({
+const markerSchema = new Schema({
   lat: Number,
   lng: Number
 })
@@ -10,7 +10,7 @@ const CoffeeSchema = new Schema({
   description: String,
   url:String,
   rating: Number,
-  locations:[locationSchema]
+  markers:[locationSchema],
 });
 const Coffee = mongoose.model('coffee', CoffeeSchema);
 
