@@ -42,7 +42,8 @@ coffeeRoutes.post('/add-coffee' ,(req,res)=>{
         name: req.body.name,
         description:req.body.description,
         url:req.body.url,
-        rating:req.body.rating
+        rating:req.body.rating,
+        markers:req.body.markers
     })
     .then(response =>{
         User.findOneAndUpdate(req.body.username,{
@@ -67,7 +68,8 @@ coffeeRoutes.put('/edit-coffee/:id' ,(req,res)=>{
         name: req.body.name,
         description:req.body.description,
         url:req.body.url,
-        rating:req.body.rating
+        rating:req.body.rating,
+        markers:req.body.markers
     }).then(coffee =>{
         if(coffee)
         res.status(200).json(coffee)
