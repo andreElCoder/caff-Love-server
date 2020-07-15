@@ -10,7 +10,7 @@ const CoffeeSchema = new Schema({
   description: String,
   url:String,
   rating: Number,
-  markers:[locationSchema],
+  markers:[markerSchema],
 });
 const Coffee = mongoose.model('coffee', CoffeeSchema);
 
