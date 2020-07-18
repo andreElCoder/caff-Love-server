@@ -91,7 +91,7 @@ coffeeRoutes.put('/edit-coffee/:id' ,(req,res)=>{
 })
     
 coffeeRoutes.delete('/delete-coffee/:id/username/:username', (req, res) => {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id) || !mongoose.Types.ObjectId.isValid(req.params.username)) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       res.status(400).json({ message: 'Specific id/username not valid'});
     }
   
