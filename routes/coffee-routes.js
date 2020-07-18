@@ -90,9 +90,9 @@ coffeeRoutes.put('/edit-coffee/:id' ,(req,res)=>{
     })
 })
     
-coffeeRoutes.delete('/delete-coffee/:id', (req, res) => {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      res.status(400).json({ message: 'Specified id is not valid'});
+coffeeRoutes.delete('/delete-coffee/:id/username/:username', (req, res) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id) || !mongoose.Types.ObjectId.isValid(req.params.username)) {
+      res.status(400).json({ message: 'Specific id/username not valid'});
     }
   
     Coffee.findByIdAndDelete(req.params.id)
@@ -102,6 +102,7 @@ coffeeRoutes.delete('/delete-coffee/:id', (req, res) => {
       .catch(error => {
         res.status(500).json({ message: `Error occurred: ${error}`});
       });
+      //User.deleteOne({})
   });
 
 coffeeRoutes.post('/images/create', (req, res, next) => {
