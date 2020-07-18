@@ -17,20 +17,6 @@ coffeeRoutes.get('/coffees' ,(req,res)=>{
     })
 })
 
-coffeeRoutes.get('/coffees/:username' ,(req,res)=>{
-
-    User.find({"username": req.params.username})
-    .then(responseFromAPI =>{
-        if(responseFromAPI){
-        res.status(200).json(responseFromAPI)
-    }
-        else{res.status(404).json({message: "No coffee found"})}
-    })
-    .catch(err =>{
-        res.status(400).json({message: "Something went wrong, " + err})
-    })
-})
-
 coffeeRoutes.get('/coffee-detail/:id' ,(req,res)=>{
     Coffee.findById(req.params.id)
     .then(coffee =>{
@@ -90,9 +76,9 @@ coffeeRoutes.put('/edit-coffee/:id' ,(req,res)=>{
     })
 })
     
-coffeeRoutes.delete('/delete-coffee/:id/username/:username', (req, res) => {
+coffeeRoutes.delete('/delete-coffee/:id', (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      res.status(400).json({ message: 'Specific id/username not valid'});
+      res.status(400).json({ message: 'Specified id is not valid'});
     }
   
     Coffee.findByIdAndDelete(req.params.id)
@@ -102,7 +88,6 @@ coffeeRoutes.delete('/delete-coffee/:id/username/:username', (req, res) => {
       .catch(error => {
         res.status(500).json({ message: `Error occurred: ${error}`});
       });
-      //User.deleteOne({})
   });
 
 coffeeRoutes.post('/images/create', (req, res, next) => {
