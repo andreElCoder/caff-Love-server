@@ -22,7 +22,7 @@ coffeeRoutes.get('/coffees/:username' ,(req,res)=>{
     User.find({"username": req.params.username})
     .then(responseFromAPI =>{
         if(responseFromAPI){
-        res.status(200).json(responseFromAPI.data[0])
+        res.status(200).json(responseFromAPI)
     }
         else{res.status(404).json({message: "No coffee found"})}
     })
