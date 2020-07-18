@@ -69,7 +69,7 @@ app.locals.title = 'Express - Generated with IronGenerator';
 app.use(
   cors({
     credentials: true,
-    origin: ['http://localhost:3000']
+    origin: ['http://localhost:3000','http://caffelov.s3-website-eu-west-1.amazonaws.com']
   })
 )
 
