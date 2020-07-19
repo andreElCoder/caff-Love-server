@@ -45,8 +45,9 @@ coffeeRoutes.post('/add-coffee' ,(req,res)=>{
         rating:req.body.rating,
         markers:req.body.markers
     })
-    .then(response =>{
-        User.findOneAndUpdate(req.body.username,{
+    .then(response =>{console.log(response) 
+        console.log(req.body.usernameId)
+        User.findByIdAndUpdate(req.body.usernameId,{
             $push:{coffees:response._id}
         }).then(()=>{
             res.status(200).json(response)
