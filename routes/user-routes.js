@@ -3,7 +3,8 @@ const userRoutes = express.Router();
 const User = require ('../models/user-model');
 const { response } = require('express');
 const Coffee = require('../models/coffee-model');
-
+const mongoose = require('mongoose');
+const { compare } = require('bcryptjs');
 
 userRoutes.get('/searchUser',(req,res)=>{
 
@@ -41,5 +42,31 @@ userRoutes.get('/username/:id/coffees' ,(req,res)=>{
         }
       })
       
-    })  
+    })
+    
+    userRoutes.delete('/username/:uid/delete-coffee/:id', (req, res) => {
+      if (!mongoose.Types.ObjectId.isValid(req.params.id) || !mongoose.Types.ObjectId.isValid(req.params.uid)) {
+        res.status(400).json({ message: 'Specified id is not valid'});
+      }
+      User.findById(req.params.uid).then(user =>{
+        console.log(user)
+        const copyCoffees = user.coffees
+        console.log(copyCoffees)
+        const index=copyCoffees.findIndex(coffeeElement => coffeeElement._id==req.params.id)
+        console.log(index)
+        copyCoffees.splice(index,1)
+        console.log(copyCoffees)
+      }) 
+
+      /*Coffee.findByIdAndDelete(req.params.id)
+        .then((response) => {
+          res.json({ message: response})
+        })
+        .catch(error => {
+          res.status(500).json({ message: `Error occurred: ${error}`});
+        });
+      */
+    });
+
+
 module.exports = userRoutes
