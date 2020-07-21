@@ -56,15 +56,21 @@ userRoutes.get('/username/:id/coffees' ,(req,res)=>{
         console.log(index)
         copyCoffees.splice(index,1)
         console.log(copyCoffees)
-      }) 
+        user.coffees=copyCoffees
+        console.log(user)
+        User.findByIdAndUpdate(req.params.uid,user)
+        .then(() =>{
+            Coffee.findByIdAndDelete(req.params.id)
+          .then((response) => {
+            res.json({ message: response})
+          })
+          .catch(error => {
+            res.status(500).json({ message: `Error occurred: ${error}`});
+          });
+          })
+        }) 
 
-      /*Coffee.findByIdAndDelete(req.params.id)
-        .then((response) => {
-          res.json({ message: response})
-        })
-        .catch(error => {
-          res.status(500).json({ message: `Error occurred: ${error}`});
-        });
+      /*
       */
     });
 

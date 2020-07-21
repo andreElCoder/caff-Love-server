@@ -29,9 +29,9 @@ coffeeRoutes.get('/coffee-detail/:id' ,(req,res)=>{
     })
 })
 
-coffeeRoutes.get('/search-coffee',(req,res)=>{
-
-    Coffee.find({"name": { "$regex": req.body.search, "$options": "i" }},{"name":1})
+coffeeRoutes.get('/search-coffee/:search',(req,res)=>{
+    console.log(req.params.search)
+    Coffee.find({"name": { "$regex": req.params.search, "$options": "i" }},{"name":1})
       .then(response =>{
         res.status(200).json(response)
       })
