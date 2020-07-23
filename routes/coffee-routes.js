@@ -101,6 +101,7 @@ coffeeRoutes.post('/images/create', (req, res, next) => {
   });
   
   coffeeRoutes.post('/upload-coffee', uploadCloud.single("url"), (req, res, next) => {
+      console.log(req.file)
       res.json({ url: req.file.secure_url });
   })
 
