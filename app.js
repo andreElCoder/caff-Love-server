@@ -14,7 +14,7 @@ const cors         = require('cors');
 
 require('./configs/passport');
 
-/*mongoose
+mongoose
   .connect(process.env.MONGODB_URI, 
   {  useCreateIndex: true,
   useNewUrlParser: true,
@@ -26,8 +26,8 @@ require('./configs/passport');
   .catch(err => {
     console.error('Error connecting to mongo', err)
   });
-*/
 
+/*
 mongoose
   .connect('mongodb://localhost/caffelov-server', {useNewUrlParser: true})
   .then(x => {
@@ -36,7 +36,7 @@ mongoose
   .catch(err => {
     console.error('Error connecting to mongo', err)
   });
-
+*/
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
